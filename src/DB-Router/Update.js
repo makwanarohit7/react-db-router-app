@@ -16,7 +16,7 @@ const Update = () => {
       method: "GET",
       redirect: "follow",
     };
-    fetch("http://localhost:3000/employees/" + userId, requestOptions)
+    fetch("http://localhost:3005/employees/" + userId, requestOptions)
       .then((response) => response.json())
       .then((data) => {
         console.log(data[0]);
@@ -48,7 +48,7 @@ const Update = () => {
       redirect: "follow",
     };
 
-    fetch("http://localhost:3000/employees/", requestOptions)
+    fetch("http://localhost:3005/employees/", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));

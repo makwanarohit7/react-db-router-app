@@ -1,4 +1,6 @@
+import { Button } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,9 +9,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-const Get = () => {
+
+const Get_Address = () => {
   const [data, setData] = useState([]);
   let navigate = useNavigate();
   useEffect(() => {
@@ -17,11 +18,13 @@ const Get = () => {
       method: "GET",
       redirect: "follow",
     };
-    fetch("http://localhost:3005/employees", requestOptions)
+
+    fetch("http://localhost:3005/addresses", requestOptions)
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => console.log("error", error));
   }, []);
+  //   console.log(data);
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -45,45 +48,38 @@ const Get = () => {
 
   return (
     <Fragment>
-      <h1>Users</h1>
+      <h1>Get Addresses</h1>
       <Button
         variant="contained"
         onClick={() => {
-          navigate(`/put`);
+          navigate(`/put_Address`);
         }}
       >
-        Add New User
+        Add New Address
       </Button>
       <p>
         <b>Data Come From DataBase : </b>
       </p>
-
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell>ID</StyledTableCell>
-              <StyledTableCell>Name</StyledTableCell>
-              <StyledTableCell>Designation</StyledTableCell>
-              <StyledTableCell>City</StyledTableCell>
-              <StyledTableCell>ContactNo</StyledTableCell>
+              <StyledTableCell>Address</StyledTableCell>
               <StyledTableCell>Edit</StyledTableCell>
               <StyledTableCell>Delete</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {data.map((item) => (
-              <StyledTableRow key={item.Id}>
-                <StyledTableCell>{item.Id}</StyledTableCell>
-                <StyledTableCell>{item.Name}</StyledTableCell>
-                <StyledTableCell>{item.Designation}</StyledTableCell>
-                <StyledTableCell>{item.City}</StyledTableCell>
-                <StyledTableCell>{item.ContactNo}</StyledTableCell>
+              <StyledTableRow key={item.AID}>
+                <StyledTableCell>{item.AID}</StyledTableCell>
+                <StyledTableCell>{item.Address}</StyledTableCell>
                 <StyledTableCell>
                   <Button
                     variant="contained"
                     onClick={() => {
-                      navigate(`/Update/${item.Id}`);
+                      navigate(`/Update_Address/${item.AID}`);
                     }}
                   >
                     Edit
@@ -93,7 +89,7 @@ const Get = () => {
                   <Button
                     variant="contained"
                     onClick={() => {
-                      navigate(`/delete/${item.Id}`);
+                      navigate(`/Delete_Address/${item.AID}`);
                     }}
                   >
                     Delete
@@ -107,4 +103,5 @@ const Get = () => {
     </Fragment>
   );
 };
-export default Get;
+
+export default Get_Address;

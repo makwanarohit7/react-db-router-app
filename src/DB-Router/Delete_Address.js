@@ -1,38 +1,42 @@
-import { Button, Input, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-const Delete = () => {
+
+const Delete_Address = () => {
   const [id, setId] = useState("");
+
   let { userId } = useParams();
 
   useEffect(() => {
-    console.log(userId);
     var requestOptions = {
       method: "GET",
       redirect: "follow",
     };
-    fetch("http://localhost:3005/employees/" + userId, requestOptions)
+
+    fetch("http://localhost:3005/addresses/" + userId, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data[0]);
-        setId(data[0].Id);
+        // console.log(data[0]);
+        setId(data[0].AID);
       })
       .catch((error) => console.log("error", error));
   }, []);
-  function handleDelete() {
+
+  function handleDelete_Address() {
     var requestOptions = {
       method: "DELETE",
       redirect: "follow",
     };
 
-    fetch(`http://localhost:3005/employees/${id}`, requestOptions)
+    fetch(`http://localhost:3005/addresses/${id}`, requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
   }
+
   return (
     <div>
-      <h1>Delete User </h1>
+      <h1>Delete Address </h1>
       <div>
         <TextField
           variant="outlined"
@@ -45,12 +49,11 @@ const Delete = () => {
         />
         <br />
         <br />
-        <Button variant="outlined" type="submit" onClick={handleDelete}>
+        <Button variant="outlined" type="submit" onClick={handleDelete_Address}>
           DELETE
         </Button>
       </div>
     </div>
   );
 };
-
-export default Delete;
+export default Delete_Address;

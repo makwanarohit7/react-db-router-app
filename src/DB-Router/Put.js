@@ -28,7 +28,7 @@ const Put = () => {
       redirect: "follow",
     };
 
-    return fetch("http://localhost:3000/employees", requestOptions)
+    return fetch("http://localhost:3005/employees", requestOptions)
       .then((response) => response.json())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));

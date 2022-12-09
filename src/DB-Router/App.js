@@ -3,6 +3,10 @@ import Put from "./Put";
 import Delete from "./Delete";
 import Update from "./Update";
 import Home from "./Home";
+import Get_Address from "./Get_Address";
+import Put_Address from "./Put_Address";
+import Update_Address from "./Update_Address";
+import Delete_Address from "./Delete_Address";
 
 import {
   BrowserRouter as Router,
@@ -98,6 +102,22 @@ const App = () => {
               </ListItem>
             </List>
 
+            <List>
+              <ListItem
+                disablePadding
+                onClick={() => {
+                  navigate("/get_address");
+                }}
+              >
+                <ListItemButton>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={"Addresses"} />
+                </ListItemButton>
+              </ListItem>
+            </List>
+
             <Divider />
           </Drawer>
           <Box
@@ -112,18 +132,42 @@ const App = () => {
                 element={isAuthenticated ? <Get /> : <Navigate to="/" />}
               />
               <Route
+                path="/get_address"
+                element={
+                  isAuthenticated ? <Get_Address /> : <Navigate to="/" />
+                }
+              />
+              <Route
                 path="/put"
                 element={isAuthenticated ? <Put /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/put_address"
+                element={
+                  isAuthenticated ? <Put_Address /> : <Navigate to="/" />
+                }
               />
 
               <Route
                 path="/update/:userId"
                 element={isAuthenticated ? <Update /> : <Navigate to="/" />}
               />
+              <Route
+                path="/update_address/:userId"
+                element={
+                  isAuthenticated ? <Update_Address /> : <Navigate to="/" />
+                }
+              />
 
               <Route
                 path="/delete/:userId"
                 element={isAuthenticated ? <Delete /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/delete_address/:userId"
+                element={
+                  isAuthenticated ? <Delete_Address /> : <Navigate to="/" />
+                }
               />
             </Routes>
           </Box>
